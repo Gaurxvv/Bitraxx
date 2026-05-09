@@ -1,36 +1,61 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Bitraxx Institutional Interface
 
-## Getting Started
+Bitraxx is a premium, high-performance institutional coin reservation platform. Designed with a "Quiet Luxury" aesthetic, it provides a seamless and secure environment for institutional investors to reserve and manage $BRX assets.
 
-First, run the development server:
+![Bitraxx Header](https://raw.githubusercontent.com/Gaurxvv/Bitraxx/main/public/header.png)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 💎 Design Philosophy
+The platform adheres to a strict **Obsidian & Gold** color palette, emphasizing exclusivity and focus. 
+- **Obsidian (#050505):** Providing depth and a sophisticated backdrop.
+- **Gold Accent (#D4AF37):** Representing value and precision.
+- **Focus Mode:** A distraction-free navigation system for critical financial workflows.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🚀 Key Features
+- **Institutional Reservation System:** Secure portal for $BRX coin allocation.
+- **Real-time Status Monitoring:** Integrated health checks and transaction tracking.
+- **Premium UI Components:** Custom-built interactive elements including `BackgroundLines`, `ChatWidget`, and advanced data tables.
+- **Supabase Integration:** Robust backend for secure data management and authentication.
+- **Mobile Optimized:** Fluid responsiveness across all device types.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🛠 Tech Stack
+- **Framework:** [Next.js 15+](https://nextjs.org/) (App Router)
+- **Database/Auth:** [Supabase](https://supabase.com/)
+- **Styling:** Tailwind CSS with Framer Motion animations
+- **Deployment:** Vercel
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🏁 Getting Started
 
-## Learn More
+### Prerequisites
+- Node.js 18.x or later
+- A Supabase account and project
 
-To learn more about Next.js, take a look at the following resources:
+### Installation
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/Gaurxvv/Bitraxx.git
+   cd Bitraxx
+   ```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+2. **Install dependencies:**
+   ```bash
+   npm install
+   ```
 
-## Deploy on Vercel
+3. **Set up Environment Variables:**
+   Create a `.env.local` file in the root directory and add your credentials:
+   ```env
+   NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
+   NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+   SUPABASE_SERVICE_ROLE_KEY=your_service_role_key
+   ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+4. **Run the development server:**
+   ```bash
+   npm run dev
+   ```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the platform.
+
+## ⚖️ License
+Internal Use Only. © 2026 Bitraxx Institutional.
