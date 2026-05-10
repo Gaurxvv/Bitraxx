@@ -1,29 +1,27 @@
 'use client'
-
 import { MessageCircle } from 'lucide-react'
 import { usePathname } from 'next/navigation'
-import { useEffect, useCallback, useRef } from 'react'
+import { useEffect, useCallback, useRef, useState } from 'react'
+import Script from 'next/script'
 
 declare global {
   interface Window {
     Tawk_API?: any;
     Tawk_LoadStart?: Date;
-    Tawk_IsLoaded?: boolean;
   }
 }
 
 const ChatWidget = () => {
   const scriptUrl = process.env.NEXT_PUBLIC_CHAT_WIDGET_SCRIPT
   const pathname = usePathname()
-  const isInitialized = useRef(false)
+  const [isReady, setIsReady] = useState(false)
 
   // Hide chat on specific pages
   const isHiddenPage = pathname === '/reserve' || pathname === '/status' || pathname?.startsWith('/admin')
 
   const handleWidgetVisibility = useCallback(() => {
-    if (typeof window !== 'undefined' && window.Tawk_API) {
+    if (typeof window !== 'undefined' && window.Tawk_API && isReady) {
       try {
-        // Only call hide/show if the API is actually available
         if (typeof window.Tawk_API.hideWidget === 'function' && typeof window.Tawk_API.showWidget === 'function') {
           if (isHiddenPage) {
             window.Tawk_API.hideWidget()
@@ -35,40 +33,11 @@ const ChatWidget = () => {
         console.warn('Tawk.to visibility toggle failed:', e)
       }
     }
-  }, [isHiddenPage])
+  }, [isHiddenPage, isReady])
 
   useEffect(() => {
-    // 1. Initial Load Logic
-    if (!isInitialized.current && scriptUrl && typeof window !== 'undefined') {
-      if (!window.Tawk_IsLoaded) {
-        window.Tawk_API = window.Tawk_API || {}
-        window.Tawk_LoadStart = new Date()
-
-        const s1 = document.createElement("script")
-        const s0 = document.getElementsByTagName("script")[0]
-        s1.async = true
-        s1.src = scriptUrl
-        s1.charset = 'UTF-8'
-        s1.setAttribute('crossorigin', '*')
-        s1.id = 'tawk-script'
-        s0.parentNode?.insertBefore(s1, s0)
-        
-        window.Tawk_IsLoaded = true
-        
-        s1.onload = () => {
-          handleWidgetVisibility()
-        }
-      }
-      isInitialized.current = true
-    }
-
-    // 2. Visibility Sync
     handleWidgetVisibility()
-    
-    // Retry visibility check after a short delay to account for Tawk.to's slow ready state
-    const timeout = setTimeout(handleWidgetVisibility, 2000)
-    return () => clearTimeout(timeout)
-  }, [pathname, isHiddenPage, handleWidgetVisibility, scriptUrl])
+  }, [pathname, handleWidgetVisibility])
 
   if (!scriptUrl) {
     if (!isHiddenPage) {
@@ -86,6 +55,16 @@ const ChatWidget = () => {
 
   return (
     <>
+      <Script
+        id="tawk-script"
+        src={scriptUrl}
+        strategy="lazyOnload"
+        onReady={() => {
+          setIsReady(true);
+          handleWidgetVisibility();
+        }}
+      />
+      
       {/* CSS Brute-force fallback to ensure widget is hidden immediately even before JS loads */}
       {isHiddenPage && (
         <style dangerouslySetInnerHTML={{ __html: `

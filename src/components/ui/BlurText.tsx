@@ -30,7 +30,7 @@ interface BlurTextProps {
 
 const BlurText = ({
   text = '',
-  delay = 200,
+  delay = 50,
   className = '',
   animateBy = 'words',
   direction = 'top',
@@ -38,9 +38,9 @@ const BlurText = ({
   rootMargin = '0px',
   animationFrom,
   animationTo,
-  easing = (t: number) => t,
+  easing = [0.22, 1, 0.36, 1],
   onAnimationComplete,
-  stepDuration = 0.35
+  stepDuration = 0.8
 }: BlurTextProps) => {
   const elements = animateBy === 'words' ? text.split(' ') : text.split('');
   const [inView, setInView] = useState(false);
@@ -63,49 +63,32 @@ const BlurText = ({
 
   const defaultFrom = useMemo(
     () =>
-      direction === 'top' ? { filter: 'blur(10px)', opacity: 0, y: -50 } : { filter: 'blur(10px)', opacity: 0, y: 50 },
+      direction === 'top' ? { filter: 'blur(8px)', opacity: 0, y: 20 } : { filter: 'blur(8px)', opacity: 0, y: -20 },
     [direction]
   );
 
   const defaultTo = useMemo(
-    () => [
-      {
-        filter: 'blur(5px)',
-        opacity: 0.5,
-        y: direction === 'top' ? 5 : -5
-      },
-      { filter: 'blur(0px)', opacity: 1, y: 0 }
-    ],
-    [direction]
+    () => ({ filter: 'blur(0px)', opacity: 1, y: 0 }),
+    []
   );
 
   const fromSnapshot = animationFrom ?? defaultFrom;
-  const toSnapshots = animationTo ?? defaultTo;
-
-  const stepCount = toSnapshots.length + 1;
-  const totalDuration = stepDuration * (stepCount - 1);
-  const times = Array.from({ length: stepCount }, (_, i) => (stepCount === 1 ? 0 : i / (stepCount - 1)));
+  const toSnapshot = animationTo ?? defaultTo;
 
   return (
     <p ref={ref} className={className} style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'inherit' }}>
       {elements.map((segment, index) => {
-        const animateKeyframes = buildKeyframes(fromSnapshot, toSnapshots);
-
-        const spanTransition: any = {
-          duration: totalDuration,
-          times,
-          delay: (index * delay) / 1000
-        };
-        spanTransition.ease = easing;
-
         return (
           <motion.span
             className="inline-block will-change-[transform,filter,opacity]"
             key={index}
             initial={fromSnapshot}
-            animate={inView ? animateKeyframes : fromSnapshot}
-            transition={spanTransition}
-            onAnimationComplete={index === elements.length - 1 ? onAnimationComplete : undefined}
+            animate={inView ? toSnapshot : fromSnapshot}
+            transition={{
+              duration: stepDuration,
+              delay: (index * delay) / 1000,
+              ease: easing
+            }}
           >
             {segment === ' ' ? '\u00A0' : segment}
             {animateBy === 'words' && index < elements.length - 1 && '\u00A0'}

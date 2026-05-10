@@ -60,6 +60,7 @@ const Hero = () => {
             amplitude={isMobile ? 0.25 : 0.3}
             distance={isMobile ? 0.12 : 0.25}
             enableMouseInteraction={!isMobile}
+            lineCount={isMobile ? 15 : 40}
             color={[1.0, 0.8, 0.2]}
           />
         </div>
