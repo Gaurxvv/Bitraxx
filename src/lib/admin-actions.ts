@@ -55,6 +55,9 @@ export async function getAllBookings() {
   return data
 }
 
+import fs from 'fs/promises'
+import path from 'path'
+
 export async function updateBookingStatus(id: string, status: BookingStatus) {
   const { error } = await supabaseAdmin
     .from('bookings')
@@ -63,4 +66,22 @@ export async function updateBookingStatus(id: string, status: BookingStatus) {
 
   if (error) return { success: false, error: error.message }
   return { success: true }
+}
+
+export async function uploadWhitepaper(formData: FormData) {
+  const file = formData.get('file') as File
+  if (!file) return { success: false, error: 'No file provided' }
+
+  try {
+    const bytes = await file.arrayBuffer()
+    const buffer = Buffer.from(bytes)
+    
+    // Path to public/whitepaper.pdf
+    const filePath = path.join(process.cwd(), 'public', 'whitepaper.pdf')
+    await fs.writeFile(filePath, buffer)
+    
+    return { success: true }
+  } catch (error: any) {
+    return { success: false, error: error.message }
+  }
 }

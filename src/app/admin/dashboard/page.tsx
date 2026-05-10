@@ -5,6 +5,8 @@ import { redirect } from 'next/navigation'
 
 export const dynamic = 'force-dynamic'
 
+import WhitepaperManager from '@/components/admin/WhitepaperManager'
+
 export default async function AdminDashboardPage() {
   const stats = await getDashboardStats()
   const bookings = await getAllBookings()
@@ -39,27 +41,35 @@ export default async function AdminDashboardPage() {
           </form>
         </div>
 
-        {/* Stats Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-16 md:mb-24">
-          {[
-            { label: 'Total Registry', value: stats.total, icon: Users, color: 'from-blue-500/20 to-transparent', iconColor: 'text-blue-400' },
-            { label: 'Awaiting Audit', value: stats.pending, icon: Clock, color: 'from-yellow-500/20 to-transparent', iconColor: 'text-yellow-400' },
-            { label: 'Authorized Entries', value: stats.approved, icon: CheckCircle, color: 'from-green-500/20 to-transparent', iconColor: 'text-green-400' },
-            { label: 'De-listed Protocol', value: stats.canceled, icon: XCircle, color: 'from-red-500/20 to-transparent', iconColor: 'text-red-400' },
-          ].map((stat) => (
-            <div key={stat.label} className="p-6 rounded-[2rem] bg-black border border-white/5 relative overflow-hidden group hover:border-white/10 transition-all duration-700">
-              <div className={`absolute inset-0 bg-gradient-to-br ${stat.color} opacity-0 group-hover:opacity-100 transition-opacity duration-700`} />
-              <div className="relative z-10">
-                <div className="flex justify-between items-start mb-8">
-                  <div className={`p-3 rounded-xl bg-white/5 border border-white/10 ${stat.iconColor}`}>
-                    <stat.icon className="w-5 h-5" />
+        {/* System & Stats Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16 md:mb-24">
+          {/* Stats Column */}
+          <div className="lg:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
+            {[
+              { label: 'Total Registry', value: stats.total, icon: Users, color: 'from-blue-500/20 to-transparent', iconColor: 'text-blue-400' },
+              { label: 'Awaiting Audit', value: stats.pending, icon: Clock, color: 'from-yellow-500/20 to-transparent', iconColor: 'text-yellow-400' },
+              { label: 'Authorized Entries', value: stats.approved, icon: CheckCircle, color: 'from-green-500/20 to-transparent', iconColor: 'text-green-400' },
+              { label: 'De-listed Protocol', value: stats.canceled, icon: XCircle, color: 'from-red-500/20 to-transparent', iconColor: 'text-red-400' },
+            ].map((stat) => (
+              <div key={stat.label} className="p-6 rounded-[2rem] bg-black border border-white/5 relative overflow-hidden group hover:border-white/10 transition-all duration-700">
+                <div className={`absolute inset-0 bg-gradient-to-br ${stat.color} opacity-0 group-hover:opacity-100 transition-opacity duration-700`} />
+                <div className="relative z-10">
+                  <div className="flex justify-between items-start mb-8">
+                    <div className={`p-3 rounded-xl bg-white/5 border border-white/10 ${stat.iconColor}`}>
+                      <stat.icon className="w-5 h-5" />
+                    </div>
                   </div>
+                  <div className="text-3xl font-serif text-white mb-1.5 tracking-tighter tabular-nums">{stat.value}</div>
+                  <div className="text-[9px] font-black uppercase tracking-[0.25em] text-slate-500 group-hover:text-slate-300 transition-colors">{stat.label}</div>
                 </div>
-                <div className="text-3xl font-serif text-white mb-1.5 tracking-tighter tabular-nums">{stat.value}</div>
-                <div className="text-[9px] font-black uppercase tracking-[0.25em] text-slate-500 group-hover:text-slate-300 transition-colors">{stat.label}</div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
+
+          {/* Management Column */}
+          <div className="lg:col-span-1">
+            <WhitepaperManager />
+          </div>
         </div>
 
         {/* Table Section */}

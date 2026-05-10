@@ -85,38 +85,64 @@ const Hero = () => {
               Engineered for the modern custodian who values absolute discretion.
             </p>
 
-            <div className="flex flex-col items-center gap-12">
+            <div className="flex flex-col items-center gap-8 mb-16">
               <Link
                 href="/reserve"
-                className="group relative px-12 py-5 border border-primary/40 hover:border-primary transition-all duration-500 overflow-hidden"
+                className="group relative px-16 py-6 bg-primary text-black hover:bg-white transition-all duration-700 overflow-hidden rounded-sm w-full sm:w-auto text-center"
               >
-                <span className="relative z-10 flex items-center gap-3 text-primary uppercase tracking-[0.2em] text-sm font-bold">
-                  Reserve Access
+                <span className="relative z-10 flex items-center justify-center gap-3 uppercase tracking-[0.3em] text-xs font-bold">
+                  Reserve Institutional Access
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </span>
-                {/* Subtle Hover Bloom */}
-                <div className="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               </Link>
 
+              <div className="flex flex-wrap items-center justify-center gap-6 md:gap-12 mt-4">
+                <a
+                  href="/whitepaper.pdf"
+                  download
+                  className="group flex items-center gap-3 text-xs font-bold uppercase tracking-[0.3em] text-slate-300 hover:text-primary transition-all duration-500"
+                >
+                  <svg className="w-4 h-4 opacity-60 group-hover:opacity-100 transition-opacity" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a2 2 0 002 2h12a2 2 0 002-2v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                  </svg>
+                  Download Whitepaper
+                </a>
+                
+                <div className="w-[1px] h-4 bg-white/20 hidden sm:block" />
+
+                <a
+                  href="/whitepaper.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group flex items-center gap-3 text-xs font-bold uppercase tracking-[0.3em] text-slate-300 hover:text-primary transition-all duration-500"
+                >
+                  <svg className="w-4 h-4 opacity-60 group-hover:opacity-100 transition-opacity" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                  </svg>
+                  View Protocol
+                </a>
+              </div>
+            </div>
+
               {/* Minimalist Countdown */}
-              <div className="flex gap-4 sm:gap-8 md:gap-16 pt-10 md:pt-20 opacity-40 hover:opacity-100 transition-opacity duration-700">
+              <div className="flex justify-center gap-3 sm:gap-10 md:gap-20 pt-12 md:pt-24 opacity-70 hover:opacity-100 transition-opacity duration-1000">
                 {[
                   { label: 'Days', value: timeLeft.days },
                   { label: 'Hours', value: timeLeft.hours },
-                  { label: 'Min', value: timeLeft.minutes },
-                  { label: 'Sec', value: timeLeft.seconds },
+                  { label: 'Minutes', value: timeLeft.minutes },
+                  { label: 'Seconds', value: timeLeft.seconds },
                 ].map((item) => (
-                  <div key={item.label} className="text-center group">
-                    <div className="text-2xl sm:text-4xl md:text-6xl font-light text-white mb-1 md:mb-2 tabular-nums">
+                  <div key={item.label} className="text-center group min-w-[60px] sm:min-w-0">
+                    <div className="text-5xl sm:text-6xl md:text-8xl font-extralight text-white mb-2 md:mb-4 tabular-nums tracking-tighter">
                       {String(item.value).padStart(2, '0')}
                     </div>
-                    <div className="text-[7px] md:text-[8px] uppercase tracking-[0.3em] text-primary font-bold">
+                    <div className="text-[10px] md:text-[10px] uppercase tracking-[0.2em] md:tracking-[0.4em] text-primary/70 font-bold group-hover:text-primary transition-colors">
                       {item.label}
                     </div>
                   </div>
                 ))}
               </div>
-            </div>
           </motion.div>
         </div>
       </div>

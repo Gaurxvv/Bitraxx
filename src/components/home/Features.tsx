@@ -60,11 +60,11 @@ const Features = () => {
             >
               <div className="flex flex-col md:flex-row items-start gap-8 md:gap-24">
                 <div className="flex items-center gap-6 md:gap-8 md:w-1/3">
-                  <span className="text-3xl md:text-6xl font-serif text-primary/10 group-hover:text-primary/30 transition-colors duration-700 font-light tabular-nums">
+                  <span className="text-3xl md:text-6xl font-serif text-primary/70 group-hover:text-primary/90 transition-colors duration-700 font-light tabular-nums">
                     {feature.index}
                   </span>
-                  <div className="w-10 h-10 md:w-12 md:h-12 flex items-center justify-center border border-primary/20 group-hover:border-primary transition-colors duration-500">
-                    <feature.icon className="w-4 h-4 md:w-5 md:h-5 text-primary/60 group-hover:text-primary" />
+                  <div className="w-10 h-10 md:w-12 md:h-12 flex items-center justify-center border border-primary/40 group-hover:border-primary transition-colors duration-500">
+                    <feature.icon className="w-4 h-4 md:w-5 md:h-5 text-primary/90 group-hover:text-primary" />
                   </div>
                 </div>
                 

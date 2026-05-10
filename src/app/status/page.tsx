@@ -105,15 +105,15 @@ function StatusContent() {
               value={bookingId}
               onChange={(e) => setBookingId(e.target.value.toUpperCase())}
               placeholder="AUTHENTICATION KEY"
-              className="w-full px-10 py-6 rounded-full bg-black border border-white/10 text-white text-lg font-bold tracking-[0.4em] placeholder:text-slate-700 focus:border-primary/40 outline-none transition-all shadow-2xl font-mono"
+              className="w-full px-5 md:px-10 py-5 md:py-6 rounded-full bg-black border border-white/10 text-white text-[13px] md:text-lg font-bold tracking-[0.1em] md:tracking-[0.4em] placeholder:text-slate-700 placeholder:text-[11px] md:placeholder:text-sm focus:border-primary/40 outline-none transition-all shadow-2xl font-mono"
             />
             <button
               onClick={() => handleSearch()}
               disabled={loading}
-              className="absolute right-2 top-2 bottom-2 px-8 rounded-full bg-primary text-black font-bold uppercase tracking-[0.2em] text-[10px] flex items-center gap-3 hover:scale-[1.02] active:scale-[0.98] transition-all duration-500 shadow-xl disabled:opacity-50 gold-gradient"
+              className="absolute right-1.5 md:right-2 top-1.5 md:top-2 bottom-1.5 md:bottom-2 px-4 md:px-8 rounded-full bg-primary text-black font-bold uppercase tracking-[0.1em] md:tracking-[0.2em] text-[9px] md:text-[10px] flex items-center gap-1.5 md:gap-3 hover:scale-[1.02] active:scale-[0.98] transition-all duration-500 shadow-xl disabled:opacity-50 gold-gradient"
             >
               {loading ? <Loader2 className="w-3 h-3 animate-spin" /> : <Search className="w-3 h-3" />}
-              Verify
+              <span>Verify</span>
             </button>
           </div>
         </div>
