@@ -83,7 +83,7 @@ export default function ReservePage() {
               <span className="text-2xl md:text-3xl font-mono font-bold text-primary tracking-wider">{submittedId}</span>
               <button
                 onClick={() => copyToClipboard(submittedId)}
-                className="p-2 hover:bg-white/10 rounded-lg transition-colors text-slate-500 hover:text-white"
+                className="cursor-target p-2 hover:bg-white/10 rounded-lg transition-colors text-slate-500 hover:text-white"
               >
                 <Copy className="w-5 h-5" />
               </button>
@@ -93,13 +93,13 @@ export default function ReservePage() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               href={`/status?id=${submittedId}`}
-              className="px-10 py-4 rounded-full bg-primary text-black font-bold uppercase tracking-widest text-[10px] gold-gradient hover:scale-105 transition-all shadow-xl"
+              className="cursor-target px-10 py-4 rounded-full bg-primary text-black font-bold uppercase tracking-widest text-[10px] gold-gradient hover:scale-105 transition-all shadow-xl"
             >
               Check Status
             </Link>
             <Link
               href="/"
-              className="px-10 py-4 rounded-full bg-white/5 border border-white/10 text-white font-bold uppercase tracking-widest text-[10px] hover:bg-white/10 transition-all"
+              className="cursor-target px-10 py-4 rounded-full bg-white/5 border border-white/10 text-white font-bold uppercase tracking-widest text-[10px] hover:bg-white/10 transition-all"
             >
               Back to Home
             </Link>
@@ -111,7 +111,7 @@ export default function ReservePage() {
 
   return (
     <div className="container mx-auto px-6 pt-8 md:pt-12 pb-20">
-      <Link href="/" className="inline-flex items-center gap-3 text-[10px] font-black uppercase tracking-[0.4em] text-slate-600 hover:text-primary mb-12 md:mb-16 transition-colors group">
+      <Link href="/" className="cursor-target inline-flex items-center gap-3 text-[10px] font-black uppercase tracking-[0.4em] text-slate-600 hover:text-primary mb-12 md:mb-16 transition-colors group">
         <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
         HOME
       </Link>
@@ -222,7 +222,7 @@ export default function ReservePage() {
             <button
               type="submit"
               disabled={isSubmitting}
-              className="w-full py-5 rounded-full bg-primary text-black font-bold text-[10px] uppercase tracking-[0.4em] hover:scale-[1.02] active:scale-[0.98] transition-all gold-gradient shadow-2xl disabled:opacity-50 flex items-center justify-center gap-4 mt-8"
+              className="cursor-target w-full py-5 rounded-full bg-primary text-black font-bold text-[10px] uppercase tracking-[0.4em] hover:scale-[1.02] active:scale-[0.98] transition-all gold-gradient shadow-2xl disabled:opacity-50 flex items-center justify-center gap-4 mt-8"
             >
               {isSubmitting ? (
                 <>

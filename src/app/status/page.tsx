@@ -81,42 +81,63 @@ function StatusContent() {
   }
 
   return (
-    <div className="container mx-auto px-6 pt-8 md:pt-12 pb-12">
-      <Link href="/" className="inline-flex items-center gap-3 text-[10px] font-black uppercase tracking-[0.4em] text-slate-600 hover:text-primary mb-8 transition-colors group">
+    <div className="min-h-screen relative overflow-hidden bg-[#0c0c0c]">
+      {/* Institutional Background Layer */}
+      <div className="absolute inset-0 z-0 pointer-events-none opacity-20">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-primary/5 via-transparent to-transparent" />
+      </div>
+
+      <div className="container mx-auto px-6 pt-8 md:pt-12 pb-20 relative z-10">
+      <Link href="/" className="cursor-target inline-flex items-center gap-3 text-[10px] font-black uppercase tracking-[0.4em] text-slate-600 hover:text-primary mb-12 md:mb-16 transition-colors group">
         <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
         HOME
       </Link>
       <div className="max-w-3xl mx-auto">
-        <div className="text-center mb-8 md:mb-12">
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-serif text-white mb-4 md:mb-6 leading-tight">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="text-center mb-12 md:mb-16"
+        >
+          <div className="inline-flex items-center gap-2 mb-6 opacity-40">
+            <div className="w-8 h-[1px] bg-primary" />
+            <span className="text-[10px] font-bold uppercase tracking-[0.4em] text-primary">Verification Portal</span>
+            <div className="w-8 h-[1px] bg-primary" />
+          </div>
+          <h1 className="text-5xl md:text-7xl font-serif text-white mb-6 leading-tight tracking-tight">
             Track Your <br />
-            <span className="italic gold-text-gradient">Sovereign Position</span>
+            <span className="italic font-light opacity-80 gold-text-gradient">Sovereign Position</span>
           </h1>
-          <p className="text-sm md:text-base text-slate-500 max-w-lg mx-auto leading-relaxed font-sans px-4">
-            Enter your unique authorization key to verify the current status of your institutional $BRX reservation.
+          <p className="text-sm md:text-lg text-slate-500 max-w-xl mx-auto leading-relaxed font-sans font-light tracking-wide px-4">
+            Enter your unique institutional authorization key to verify the real-time status of your $BRX allocation.
           </p>
-        </div>
+        </motion.div>
 
-        <div className="relative max-w-2xl mx-auto group">
+        <motion.div 
+          initial={{ opacity: 0, scale: 0.98 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 0.1 }}
+          className="relative max-w-2xl mx-auto group"
+        >
           <div className="absolute -inset-1 bg-gradient-to-r from-primary/20 to-transparent rounded-full blur opacity-0 group-focus-within:opacity-100 transition-opacity duration-700" />
-          <div className="relative">
+          <div className="relative overflow-hidden rounded-sm border border-white/10 bg-white/[0.02] backdrop-blur-xl">
+            <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-primary/50 to-transparent opacity-0 group-focus-within:opacity-100 transition-opacity duration-700" />
             <input
               type="text"
               value={bookingId}
               onChange={(e) => setBookingId(e.target.value.toUpperCase())}
               placeholder="AUTHENTICATION KEY"
-              className="w-full px-5 md:px-10 py-5 md:py-6 rounded-full bg-black border border-white/10 text-white text-[13px] md:text-lg font-bold tracking-[0.1em] md:tracking-[0.4em] placeholder:text-slate-700 placeholder:text-[11px] md:placeholder:text-sm focus:border-primary/40 outline-none transition-all shadow-2xl font-mono"
+              className="w-full px-8 py-8 md:py-10 bg-transparent text-white text-lg md:text-2xl font-light tracking-[0.4em] placeholder:text-slate-800 placeholder:text-sm focus:outline-none transition-all font-mono"
             />
             <button
               onClick={() => handleSearch()}
               disabled={loading}
-              className="absolute right-1.5 md:right-2 top-1.5 md:top-2 bottom-1.5 md:bottom-2 px-4 md:px-8 rounded-full bg-primary text-black font-bold uppercase tracking-[0.1em] md:tracking-[0.2em] text-[9px] md:text-[10px] flex items-center gap-1.5 md:gap-3 hover:scale-[1.02] active:scale-[0.98] transition-all duration-500 shadow-xl disabled:opacity-50 gold-gradient"
+              className="cursor-target absolute right-4 top-1/2 -translate-y-1/2 px-8 py-4 bg-primary text-black font-bold uppercase tracking-[0.2em] text-[10px] flex items-center gap-3 hover:bg-white transition-all duration-500 disabled:opacity-50"
             >
               {loading ? <Loader2 className="w-3 h-3 animate-spin" /> : <Search className="w-3 h-3" />}
               <span>Verify</span>
             </button>
           </div>
-        </div>
+        </motion.div>
 
         {loading ? (
           <div className="flex flex-col items-center justify-center py-20">
@@ -179,26 +200,28 @@ function StatusContent() {
         )}
 
         {!searched && (
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 mt-10">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mt-16">
             {[
-              { icon: <Clock className="w-6 h-6 text-primary" />, label: 'Review Cycle', desc: 'Standard verification protocol' },
-              { icon: <CheckCircle className="w-6 h-6 text-primary" />, label: 'Authorized', desc: 'Allocation secured in vault' },
-              { icon: <XCircle className="w-6 h-6 text-primary" />, label: 'De-listed', desc: 'Protocol exit or expiration' },
+              { icon: <Clock className="w-5 h-5 text-primary" />, label: 'Review Cycle', desc: 'Sovereign Verification' },
+              { icon: <CheckCircle className="w-5 h-5 text-primary" />, label: 'Authorized', desc: 'Allocation Secured' },
+              { icon: <XCircle className="w-5 h-5 text-primary" />, label: 'De-listed', desc: 'Protocol Exit' },
             ].map((item, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 }}
-                className="group p-8 rounded-[2rem] bg-white/[0.03] border border-white/5 hover:border-primary/30 transition-all duration-500 text-center relative overflow-hidden"
+                transition={{ delay: 0.3 + index * 0.1 }}
+                className="group p-8 border border-white/5 bg-white/[0.01] hover:border-primary/20 transition-all duration-700 relative overflow-hidden"
               >
-                <div className="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                <div className="relative z-10 flex flex-col items-center">
-                  <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500">
+                <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-primary/30" />
+                <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-primary/30" />
+                
+                <div className="relative z-10 flex flex-col items-start text-left">
+                  <div className="w-10 h-10 rounded-full bg-primary/5 flex items-center justify-center mb-6 group-hover:bg-primary/10 transition-colors duration-500">
                     {item.icon}
                   </div>
-                  <span className="text-[10px] font-bold text-white uppercase tracking-[0.3em] mb-2">{item.label}</span>
-                  <p className="text-[9px] text-slate-600 uppercase tracking-widest">{item.desc}</p>
+                  <span className="text-[10px] font-bold text-white uppercase tracking-[0.4em] mb-2">{item.label}</span>
+                  <p className="text-[9px] text-slate-500 uppercase tracking-widest font-light">{item.desc}</p>
                 </div>
               </motion.div>
             ))}
@@ -206,6 +229,7 @@ function StatusContent() {
         )}
       </div>
     </div>
+  </div>
   )
 }
 

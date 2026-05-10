@@ -4,6 +4,10 @@ import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { ArrowRight, Shield } from 'lucide-react'
+import BlurText from '@/components/ui/BlurText'
+import dynamic from 'next/dynamic'
+
+const Threads = dynamic(() => import('@/components/ui/Threads'), { ssr: false })
 
 const Hero = () => {
   const [timeLeft, setTimeLeft] = useState({
@@ -12,6 +16,14 @@ const Hero = () => {
     minutes: 0,
     seconds: 0,
   })
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    setIsMobile(window.innerWidth < 768)
+    const handleResize = () => setIsMobile(window.innerWidth < 768)
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
 
   useEffect(() => {
     const targetDate = new Date('2026-05-15T00:00:00').getTime()
@@ -37,11 +49,21 @@ const Hero = () => {
   }, [])
 
   return (
-    <section className="relative min-h-[90vh] flex flex-col items-center justify-center pt-40 pb-20 overflow-hidden bg-[#0c0c0c]">
+    <section className="relative min-h-[100dvh] flex flex-col items-center justify-center pt-32 md:pt-28 pb-20 overflow-hidden bg-[#0c0c0c]">
       {/* Architectural Accents */}
-      <div className="absolute inset-0 -z-10 overflow-hidden">
+      <div className="absolute inset-0 z-0 overflow-hidden bg-transparent">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1200px] h-[1200px] bg-primary/10 rounded-full blur-[250px] opacity-40 animate-pulse-slow" />
         
+        {/* Threads Background */}
+        <div className="absolute top-[10vh] md:top-[35vh] left-0 right-0 h-[70vh] md:h-[80vh] opacity-40 md:opacity-60 pointer-events-none">
+          <Threads
+            amplitude={isMobile ? 0.25 : 0.3}
+            distance={isMobile ? 0.12 : 0.25}
+            enableMouseInteraction={!isMobile}
+            color={[1.0, 0.8, 0.2]}
+          />
+        </div>
+
         {/* Dynamic Vertical Lines */}
         <div className="absolute inset-0 opacity-20">
           <div className="absolute top-0 left-[15%] w-[1px] h-full bg-gradient-to-b from-transparent via-primary to-transparent" />
@@ -69,38 +91,45 @@ const Hero = () => {
             transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
           >
             {/* Minimal Badge */}
-            <div className="inline-flex items-center gap-2 mb-6 md:mb-8 opacity-60">
-              <div className="w-6 md:w-8 h-[1px] bg-primary/50" />
-              <span className="text-[8px] md:text-[10px] font-bold uppercase tracking-[0.4em] text-primary">Sovereignty Protocol</span>
-              <div className="w-6 md:w-8 h-[1px] bg-primary/50" />
+            <div className="inline-flex items-center gap-3 mb-8 md:mb-10 px-5 py-2 rounded-full border border-primary/20 bg-primary/5 backdrop-blur-md transition-all duration-700">
+              <div className="w-2 h-2 rounded-full bg-primary animate-pulse" />
+              <span className="text-[10px] md:text-[11px] font-bold uppercase tracking-[0.4em] text-primary">Sovereignty Protocol</span>
             </div>
 
-            <h1 className="text-4xl sm:text-6xl md:text-9xl font-serif text-white mb-8 md:mb-12 leading-[1.1] tracking-tight">
-              Powering the Next <br className="hidden sm:block" />
-              <span className="italic font-light opacity-80">Generation.</span>
-            </h1>
+            <div className="flex flex-col items-center mb-8 md:mb-10">
+              <BlurText
+                text="Powering the Next"
+                delay={100}
+                className="text-4xl sm:text-6xl md:text-9xl font-serif text-white leading-[1.1] tracking-tight justify-center"
+              />
+              <BlurText
+                text="Generation."
+                delay={100}
+                className="text-4xl sm:text-6xl md:text-9xl font-serif italic font-light opacity-80 text-white leading-[1.1] tracking-tight justify-center"
+              />
+            </div>
 
-            <p className="text-lg md:text-xl text-slate-500 max-w-2xl mx-auto mb-16 leading-relaxed font-sans font-light tracking-wide">
+            <p className="text-base md:text-xl text-slate-400 max-w-2xl mx-auto mb-12 md:mb-16 leading-relaxed font-sans font-light tracking-wide px-6">
               A fully operational crypto platform before token launch — built with real utility from day one. 
               Engineered for the modern custodian who values absolute discretion.
             </p>
 
-            <div className="flex flex-col items-center gap-8 mb-20 md:mb-32">
+            <div className="flex flex-col items-center gap-6 md:gap-8 mb-16 md:mb-24">
               <Link
                 href="/reserve"
-                className="group relative px-16 py-6 bg-primary text-black hover:bg-white transition-all duration-700 overflow-hidden rounded-sm w-full sm:w-auto text-center"
+                className="cursor-target group relative px-12 md:px-16 py-5 md:py-6 bg-primary text-black hover:bg-white transition-all duration-700 overflow-hidden rounded-sm w-auto min-w-[280px] text-center"
               >
-                <span className="relative z-10 flex items-center justify-center gap-3 uppercase tracking-[0.3em] text-xs font-bold">
+                <span className="relative z-10 flex items-center justify-center gap-3 uppercase tracking-[0.3em] text-[10px] md:text-xs font-bold">
                   Reserve Institutional Access
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </span>
               </Link>
 
               {/* Dedicated Documentation & Investor Intel Section */}
-              <div className="pt-16 md:pt-24 border-t border-white/5 w-full max-w-4xl">
-                <div className="text-center mb-10">
+              <div className="pt-12 md:pt-24 border-t border-white/5 w-full max-w-4xl px-4 md:px-0">
+                <div className="text-center mb-8 md:mb-10">
                   <span className="text-[10px] font-black text-primary uppercase tracking-[0.5em] mb-4 block">Institutional Protocol</span>
-                  <h2 className="text-2xl md:text-3xl font-serif text-white italic opacity-90">Technical Intelligence</h2>
+                  <h2 className="text-xl md:text-3xl font-serif text-white italic opacity-90">Technical Intelligence</h2>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-12 text-left">
@@ -126,7 +155,7 @@ const Hero = () => {
                   <a
                     href="/whitepaper.pdf"
                     download
-                    className="flex-1 w-full sm:w-auto group flex items-center justify-center gap-3 px-10 py-5 bg-white/5 border border-white/10 rounded-full hover:bg-white/[0.08] hover:border-primary/30 transition-all duration-700 shadow-2xl"
+                    className="cursor-target flex-1 w-full sm:w-auto group flex items-center justify-center gap-3 px-10 py-5 bg-white/5 border border-white/10 rounded-full hover:bg-white/[0.08] hover:border-primary/30 transition-all duration-700 shadow-2xl"
                   >
                     <svg className="w-4 h-4 text-primary opacity-60 group-hover:opacity-100 transition-opacity" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a2 2 0 002 2h12a2 2 0 002-2v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
@@ -139,7 +168,7 @@ const Hero = () => {
                     target="_blank"
                     rel="noopener noreferrer"
                     type="application/pdf"
-                    className="flex-1 w-full sm:w-auto group flex items-center justify-center gap-3 px-10 py-5 bg-primary text-black rounded-full hover:bg-white transition-all duration-700 shadow-[0_0_30px_rgba(234,179,8,0.15)]"
+                    className="cursor-target flex-1 w-full sm:w-auto group flex items-center justify-center gap-3 px-10 py-5 bg-primary text-black rounded-full hover:bg-white transition-all duration-700 shadow-[0_0_30px_rgba(234,179,8,0.15)]"
                   >
                     <svg className="w-4 h-4 opacity-80 group-hover:opacity-100 transition-opacity" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />

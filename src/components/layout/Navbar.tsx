@@ -34,20 +34,20 @@ const Navbar = () => {
             width={350}
             height={125}
             priority
-            className={`${scrolled ? 'h-8 md:h-14' : 'h-10 md:h-20'} w-auto object-contain brightness-125 transition-all duration-500 group-hover:scale-[1.02]`}
+            className={`${scrolled ? 'h-6 md:h-9' : 'h-8 md:h-14'} w-auto object-contain brightness-125 transition-all duration-500 group-hover:scale-[1.02]`}
           />
         </Link>
 
         <div className="flex items-center gap-2 md:gap-6">
           <Link
             href="/status"
-            className="px-3 md:px-6 py-2 md:py-3 rounded-full border border-primary/40 text-primary font-bold text-[8px] md:text-xs uppercase tracking-[0.2em] hover:bg-primary/5 transition-all duration-500"
+            className="cursor-target px-3 md:px-6 py-2 md:py-3 rounded-full border border-primary/40 text-primary font-bold text-[8px] md:text-xs uppercase tracking-[0.2em] hover:bg-primary/5 transition-all duration-500"
           >
             Check Status
           </Link>
           <Link
             href="/reserve"
-            className="px-4 md:px-10 py-2 md:py-3 rounded-full bg-primary text-black font-bold text-[8px] md:text-xs uppercase tracking-[0.2em] hover:bg-white transition-all duration-500 shadow-[0_10px_30px_rgba(212,175,55,0.3)]"
+            className="cursor-target px-4 md:px-10 py-2 md:py-3 rounded-full bg-primary text-black font-bold text-[8px] md:text-xs uppercase tracking-[0.2em] hover:bg-white transition-all duration-500 shadow-[0_10px_30px_rgba(212,175,55,0.3)]"
           >
             Access Registry
           </Link>
