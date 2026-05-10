@@ -69,7 +69,7 @@ const Hero = () => {
             transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
           >
             {/* Minimal Badge */}
-            <div className="inline-flex items-center gap-2 mb-8 md:mb-12 opacity-60">
+            <div className="inline-flex items-center gap-2 mb-6 md:mb-8 opacity-60">
               <div className="w-6 md:w-8 h-[1px] bg-primary/50" />
               <span className="text-[8px] md:text-[10px] font-bold uppercase tracking-[0.4em] text-primary">Sovereignty Protocol</span>
               <div className="w-6 md:w-8 h-[1px] bg-primary/50" />
@@ -85,7 +85,7 @@ const Hero = () => {
               Engineered for the modern custodian who values absolute discretion.
             </p>
 
-            <div className="flex flex-col items-center gap-8 mb-16">
+            <div className="flex flex-col items-center gap-8 mb-20 md:mb-32">
               <Link
                 href="/reserve"
                 className="group relative px-16 py-6 bg-primary text-black hover:bg-white transition-all duration-700 overflow-hidden rounded-sm w-full sm:w-auto text-center"
@@ -96,32 +96,37 @@ const Hero = () => {
                 </span>
               </Link>
 
-              <div className="flex flex-wrap items-center justify-center gap-6 md:gap-12 mt-4">
-                <a
-                  href="/whitepaper.pdf"
-                  download
-                  className="group flex items-center gap-3 text-xs font-bold uppercase tracking-[0.3em] text-slate-300 hover:text-primary transition-all duration-500"
-                >
-                  <svg className="w-4 h-4 opacity-60 group-hover:opacity-100 transition-opacity" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a2 2 0 002 2h12a2 2 0 002-2v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-                  </svg>
-                  Download Whitepaper
-                </a>
-                
-                <div className="w-[1px] h-4 bg-white/20 hidden sm:block" />
-
-                <a
-                  href="/whitepaper.pdf"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group flex items-center gap-3 text-xs font-bold uppercase tracking-[0.3em] text-slate-300 hover:text-primary transition-all duration-500"
-                >
-                  <svg className="w-4 h-4 opacity-60 group-hover:opacity-100 transition-opacity" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                  </svg>
-                  View Protocol
-                </a>
+              {/* Attractive Documentation Cluster */}
+              <div className="pt-8 md:pt-12 border-t border-white/5 w-full max-w-lg">
+                <div className="text-center mb-6">
+                  <span className="text-[8px] font-bold text-slate-600 uppercase tracking-[0.4em]">Technical Documentation</span>
+                </div>
+                <div className="flex flex-col sm:flex-row items-center justify-center gap-4 px-4">
+                  <a
+                    href="/whitepaper.pdf"
+                    download
+                    className="flex-1 w-full sm:w-auto group flex items-center justify-center gap-3 px-8 py-4 bg-white/5 border border-white/10 rounded-full hover:bg-white/[0.08] hover:border-primary/30 transition-all duration-500 shadow-2xl"
+                  >
+                    <svg className="w-4 h-4 text-primary opacity-60 group-hover:opacity-100 transition-opacity" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a2 2 0 002 2h12a2 2 0 002-2v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                    </svg>
+                    <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-300 group-hover:text-white transition-colors">Download PDF</span>
+                  </a>
+                  
+                  <a
+                    href="/whitepaper.pdf"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    type="application/pdf"
+                    className="flex-1 w-full sm:w-auto group flex items-center justify-center gap-3 px-8 py-4 bg-white/5 border border-white/10 rounded-full hover:bg-white/[0.08] hover:border-primary/30 transition-all duration-500 shadow-2xl"
+                  >
+                    <svg className="w-4 h-4 text-primary opacity-60 group-hover:opacity-100 transition-opacity" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                    </svg>
+                    <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-300 group-hover:text-white transition-colors">View Protocol</span>
+                  </a>
+                </div>
               </div>
             </div>
 
