@@ -76,12 +76,20 @@ export async function uploadWhitepaper(formData: FormData) {
     const bytes = await file.arrayBuffer()
     const buffer = Buffer.from(bytes)
     
-    // Path to public/whitepaper.pdf
-    const filePath = path.join(process.cwd(), 'public', 'whitepaper.pdf')
-    await fs.writeFile(filePath, buffer)
+    // Upload to Supabase Storage (Documentation bucket)
+    // We use upsert: true to overwrite the existing file
+    const { data, error } = await supabaseAdmin.storage
+      .from('documentation')
+      .upload('whitepaper.pdf', buffer, {
+        contentType: 'application/pdf',
+        upsert: true
+      })
+
+    if (error) throw error
     
     return { success: true }
   } catch (error: any) {
+    console.error('Upload Error:', error)
     return { success: false, error: error.message }
   }
 }
