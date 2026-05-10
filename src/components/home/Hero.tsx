@@ -52,7 +52,7 @@ const Hero = () => {
     <section className="relative min-h-[100dvh] flex flex-col items-center justify-center pt-32 md:pt-28 pb-20 overflow-hidden bg-[#0c0c0c]">
       {/* Architectural Accents */}
       <div className="absolute inset-0 z-0 overflow-hidden bg-transparent">
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1200px] h-[1200px] bg-primary/10 rounded-full blur-[250px] opacity-40 animate-pulse-slow" />
+        <div className="absolute top-[-10%] left-1/2 -translate-x-1/2 w-[600px] md:w-[1000px] h-[600px] md:h-[1000px] bg-primary/10 rounded-full blur-[80px] md:blur-[120px] opacity-30 animate-pulse-slow pointer-events-none" />
         
         {/* Threads Background */}
         <div className="absolute top-[10vh] md:top-[35vh] left-0 right-0 h-[70vh] md:h-[80vh] opacity-40 md:opacity-60 pointer-events-none">
@@ -64,20 +64,20 @@ const Hero = () => {
           />
         </div>
 
-        {/* Dynamic Vertical Lines */}
-        <div className="absolute inset-0 opacity-20">
+        {/* Dynamic Vertical Lines - Desktop Only for Performance */}
+        <div className="absolute inset-0 opacity-10 hidden md:block">
           <div className="absolute top-0 left-[15%] w-[1px] h-full bg-gradient-to-b from-transparent via-primary to-transparent" />
           <div className="absolute top-0 right-[15%] w-[1px] h-full bg-gradient-to-b from-transparent via-primary to-transparent" />
           
           {/* Scanning Effect */}
           <motion.div 
             animate={{ top: ['-20%', '120%'] }}
-            transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+            transition={{ duration: 6, repeat: Infinity, ease: "linear" }}
             className="absolute left-[15%] w-[1px] h-20 bg-gradient-to-b from-transparent via-white to-transparent blur-[2px]"
           />
           <motion.div 
             animate={{ top: ['-20%', '120%'] }}
-            transition={{ duration: 4, repeat: Infinity, ease: "linear", delay: 2 }}
+            transition={{ duration: 6, repeat: Infinity, ease: "linear", delay: 3 }}
             className="absolute right-[15%] w-[1px] h-20 bg-gradient-to-b from-transparent via-white to-transparent blur-[2px]"
           />
         </div>
@@ -117,7 +117,7 @@ const Hero = () => {
             <div className="flex flex-col items-center gap-6 md:gap-8 mb-16 md:mb-24">
               <Link
                 href="/reserve"
-                className="cursor-target group relative px-12 md:px-16 py-5 md:py-6 bg-primary text-black hover:bg-white transition-all duration-700 overflow-hidden rounded-sm w-auto min-w-[280px] text-center"
+                className="group relative px-12 md:px-16 py-5 md:py-6 bg-primary text-black hover:bg-white transition-all duration-700 overflow-hidden rounded-sm w-auto min-w-[280px] text-center"
               >
                 <span className="relative z-10 flex items-center justify-center gap-3 uppercase tracking-[0.3em] text-[10px] md:text-xs font-bold">
                   Reserve Institutional Access
@@ -155,7 +155,7 @@ const Hero = () => {
                   <a
                     href="/whitepaper.pdf"
                     download
-                    className="cursor-target flex-1 w-full sm:w-auto group flex items-center justify-center gap-3 px-10 py-5 bg-white/5 border border-white/10 rounded-full hover:bg-white/[0.08] hover:border-primary/30 transition-all duration-700 shadow-2xl"
+                    className="flex-1 w-full sm:w-auto group flex items-center justify-center gap-3 px-10 py-5 bg-white/5 border border-white/10 rounded-full hover:bg-white/[0.08] hover:border-primary/30 transition-all duration-700 shadow-2xl"
                   >
                     <svg className="w-4 h-4 text-primary opacity-60 group-hover:opacity-100 transition-opacity" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a2 2 0 002 2h12a2 2 0 002-2v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
@@ -168,7 +168,7 @@ const Hero = () => {
                     target="_blank"
                     rel="noopener noreferrer"
                     type="application/pdf"
-                    className="cursor-target flex-1 w-full sm:w-auto group flex items-center justify-center gap-3 px-10 py-5 bg-primary text-black rounded-full hover:bg-white transition-all duration-700 shadow-[0_0_30px_rgba(234,179,8,0.15)]"
+                    className="flex-1 w-full sm:w-auto group flex items-center justify-center gap-3 px-10 py-5 bg-primary text-black rounded-full hover:bg-white transition-all duration-700 shadow-[0_0_30px_rgba(234,179,8,0.15)]"
                   >
                     <svg className="w-4 h-4 opacity-80 group-hover:opacity-100 transition-opacity" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />

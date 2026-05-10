@@ -88,7 +88,7 @@ function StatusContent() {
       </div>
 
       <div className="container mx-auto px-6 pt-8 md:pt-12 pb-20 relative z-10">
-      <Link href="/" className="cursor-target inline-flex items-center gap-3 text-[10px] font-black uppercase tracking-[0.4em] text-slate-600 hover:text-primary mb-12 md:mb-16 transition-colors group">
+      <Link href="/" className="inline-flex items-center gap-3 text-[10px] font-black uppercase tracking-[0.4em] text-slate-600 hover:text-primary mb-12 md:mb-16 transition-colors group">
         <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
         HOME
       </Link>
@@ -131,7 +131,7 @@ function StatusContent() {
             <button
               onClick={() => handleSearch()}
               disabled={loading}
-              className="cursor-target absolute right-4 top-1/2 -translate-y-1/2 px-8 py-4 bg-primary text-black font-bold uppercase tracking-[0.2em] text-[10px] flex items-center gap-3 hover:bg-white transition-all duration-500 disabled:opacity-50"
+              className="absolute right-4 top-1/2 -translate-y-1/2 px-8 py-4 bg-primary text-black font-bold uppercase tracking-[0.2em] text-[10px] flex items-center gap-3 hover:bg-white transition-all duration-500 disabled:opacity-50"
             >
               {loading ? <Loader2 className="w-3 h-3 animate-spin" /> : <Search className="w-3 h-3" />}
               <span>Verify</span>

@@ -5,7 +5,6 @@ import FAQ from "@/components/home/FAQ";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import BackgroundLines from "@/components/layout/BackgroundLines";
-import TargetCursor from "@/components/ui/TargetCursor";
 
 export default function Home() {
   return (
@@ -36,7 +35,7 @@ export default function Home() {
             </p>
             <Link
               href="/reserve"
-              className="cursor-target inline-flex items-center gap-4 px-14 py-6 border border-primary/60 hover:border-primary transition-all duration-500 group"
+              className="inline-flex items-center gap-4 px-14 py-6 border border-primary/60 hover:border-primary transition-all duration-500 group"
             >
               <span className="text-primary uppercase tracking-[0.3em] text-sm font-bold">
                 Enter The Registry
@@ -48,7 +47,6 @@ export default function Home() {
       </section>
 
       <FAQ />
-      <TargetCursor />
     </div>
   );
 }

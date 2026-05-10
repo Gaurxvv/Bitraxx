@@ -62,12 +62,8 @@ const Features = () => {
 
         <div className="space-y-0">
           {features.map((feature, index) => (
-            <motion.div
+            <div
               key={index}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.8, delay: index * 0.1, ease: [0.22, 1, 0.36, 1] }}
               className="group border-t border-primary/10 py-12 md:py-24 hover:bg-primary/[0.01] transition-all duration-700"
             >
               <div className="flex flex-col md:flex-row items-start gap-8 md:gap-24">
@@ -89,7 +85,7 @@ const Features = () => {
                   </p>
                 </div>
               </div>
-            </motion.div>
+            </div>
           ))}
           <div className="border-t border-primary/10" />
         </div>
