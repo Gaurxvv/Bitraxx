@@ -1,7 +1,7 @@
 'use client'
 
 import { UserPlus, ShieldCheck, Award } from 'lucide-react'
-import { motion } from 'framer-motion'
+import { motion, Variants } from 'framer-motion'
 
 const steps = [
   {
@@ -21,7 +21,7 @@ const steps = [
   },
 ]
 
-const containerVariants = {
+const containerVariants: Variants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
@@ -32,14 +32,14 @@ const containerVariants = {
   }
 }
 
-const itemVariants = {
+const itemVariants: Variants = {
   hidden: { opacity: 0, y: 30 },
   visible: {
     opacity: 1,
     y: 0,
     transition: {
       duration: 0.8,
-      ease: [0.22, 1, 0.36, 1]
+      ease: [0.22, 1, 0.36, 1] as any
     }
   }
 }
@@ -70,8 +70,8 @@ const HowItWorks = () => {
             {/* Architectural Connecting Line */}
             <motion.div 
               variants={{
-                hidden: { opacity: 0, scaleX: 0 },
-                visible: { opacity: 1, scaleX: 1, transition: { duration: 1, ease: "circOut", delay: 0.5 } }
+                hidden: { opacity: 0, y: 20 },
+                visible: { opacity: 1, y: 0, transition: { duration: 1, ease: [0.22, 1, 0.36, 1] as any } }
               }}
               className="hidden lg:block absolute top-[40px] left-[10%] right-[10%] h-[1px] bg-gradient-to-r from-transparent via-primary/20 to-transparent -z-10 origin-left" 
             />

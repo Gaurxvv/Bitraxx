@@ -104,7 +104,7 @@ const Hero = () => {
             <motion.div 
               variants={{
                 hidden: { opacity: 0, y: 20 },
-                visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] } }
+                visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] as any } }
               }}
               className="inline-flex items-center gap-3 mb-8 md:mb-10 px-5 py-2 rounded-full border border-primary/20 bg-primary/5 backdrop-blur-md transition-all duration-700"
             >
@@ -134,7 +134,7 @@ const Hero = () => {
             <motion.p 
               variants={{
                 hidden: { opacity: 0, y: 20 },
-                visible: { opacity: 1, y: 0, transition: { duration: 1, ease: [0.22, 1, 0.36, 1] } }
+                visible: { opacity: 1, y: 0, transition: { duration: 1, ease: [0.22, 1, 0.36, 1] as any } }
               }}
               className="text-base md:text-xl text-slate-400 max-w-2xl mx-auto mb-12 md:mb-16 leading-relaxed font-sans font-light tracking-wide px-6"
             >
@@ -145,7 +145,7 @@ const Hero = () => {
             <motion.div 
               variants={{
                 hidden: { opacity: 0, y: 20 },
-                visible: { opacity: 1, y: 0, transition: { duration: 1, ease: [0.22, 1, 0.36, 1] } }
+                visible: { opacity: 1, y: 0, transition: { duration: 1, ease: [0.22, 1, 0.36, 1] as any } }
               }}
               className="flex flex-col items-center gap-6 md:gap-8 mb-16 md:mb-24"
             >
@@ -176,7 +176,7 @@ const Hero = () => {
                 <motion.div 
                   variants={{
                     hidden: { opacity: 0, y: 20 },
-                    visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] } }
+                    visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] as any } }
                   }}
                   className="text-center mb-8 md:mb-10"
                 >
@@ -195,7 +195,7 @@ const Hero = () => {
                       key={i} 
                       variants={{
                         hidden: { opacity: 0, y: 20 },
-                        visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] } }
+                        visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] as any } }
                       }}
                       className="p-6 rounded-2xl bg-white/[0.02] border border-white/5 hover:border-primary/20 hover:bg-white/[0.04] transition-all duration-500 group"
                     >
@@ -213,9 +213,9 @@ const Hero = () => {
                 <motion.div 
                   variants={{
                     hidden: { opacity: 0, y: 20 },
-                    visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] } }
+                    visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] as any } }
                   }}
-                  className="flex flex-col sm:flex-row items-center justify-center gap-4 px-4"
+                  className="flex flex-col items-center justify-center gap-4 px-4 sm:flex-row"
                 >
                   <a
                     href="/whitepaper.pdf"
