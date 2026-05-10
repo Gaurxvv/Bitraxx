@@ -127,11 +127,29 @@ const Hero = () => {
               </Link>
 
               {/* Dedicated Documentation & Investor Intel Section */}
-              <div className="pt-12 md:pt-24 border-t border-white/5 w-full max-w-4xl px-4 md:px-0">
-                <div className="text-center mb-8 md:mb-10">
+              <motion.div 
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-100px" }}
+                variants={{
+                  hidden: { opacity: 0 },
+                  visible: {
+                    opacity: 1,
+                    transition: { staggerChildren: 0.1 }
+                  }
+                }}
+                className="pt-12 md:pt-24 border-t border-white/5 w-full max-w-4xl px-4 md:px-0"
+              >
+                <motion.div 
+                  variants={{
+                    hidden: { opacity: 0, y: 20 },
+                    visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] } }
+                  }}
+                  className="text-center mb-8 md:mb-10"
+                >
                   <span className="text-[10px] font-black text-primary uppercase tracking-[0.5em] mb-4 block">Institutional Protocol</span>
                   <h2 className="text-xl md:text-3xl font-serif text-white italic opacity-90">Technical Intelligence</h2>
-                </div>
+                </motion.div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-12 text-left">
                   {[
@@ -140,7 +158,14 @@ const Hero = () => {
                     { title: 'Operational Utility', desc: 'Full platform functionality active before token release — value from day zero.' },
                     { title: 'Audited Transparency', desc: 'Open-source logic verified for institutional-grade reliability and trust.' },
                   ].map((point, i) => (
-                    <div key={i} className="p-6 rounded-2xl bg-white/[0.02] border border-white/5 hover:border-primary/20 hover:bg-white/[0.04] transition-all duration-500 group">
+                    <motion.div 
+                      key={i} 
+                      variants={{
+                        hidden: { opacity: 0, y: 20 },
+                        visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] } }
+                      }}
+                      className="p-6 rounded-2xl bg-white/[0.02] border border-white/5 hover:border-primary/20 hover:bg-white/[0.04] transition-all duration-500 group"
+                    >
                       <div className="flex items-start gap-4">
                         <div className="mt-1 w-1.5 h-1.5 rounded-full bg-primary/40 group-hover:bg-primary transition-colors shadow-[0_0_8px_rgba(234,179,8,0.4)]" />
                         <div>
@@ -148,11 +173,17 @@ const Hero = () => {
                           <p className="text-xs text-slate-500 leading-relaxed font-light">{point.desc}</p>
                         </div>
                       </div>
-                    </div>
+                    </motion.div>
                   ))}
                 </div>
 
-                <div className="flex flex-col sm:flex-row items-center justify-center gap-4 px-4">
+                <motion.div 
+                  variants={{
+                    hidden: { opacity: 0, y: 20 },
+                    visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] } }
+                  }}
+                  className="flex flex-col sm:flex-row items-center justify-center gap-4 px-4"
+                >
                   <a
                     href="/whitepaper.pdf"
                     download
@@ -177,8 +208,8 @@ const Hero = () => {
                     </svg>
                     <span className="text-[10px] font-black uppercase tracking-[0.2em] transition-colors">Open Whitepaper</span>
                   </a>
-                </div>
-              </div>
+                </motion.div>
+              </motion.div>
             </div>
 
               {/* Minimalist Countdown */}
