@@ -87,17 +87,38 @@ const Hero = () => {
       <div className="container mx-auto px-6 relative z-10">
         <div className="max-w-6xl mx-auto text-center">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
+            initial="hidden"
+            animate="visible"
+            variants={{
+              hidden: { opacity: 0 },
+              visible: {
+                opacity: 1,
+                transition: {
+                  staggerChildren: 0.15,
+                  delayChildren: 0.3
+                }
+              }
+            }}
           >
             {/* Minimal Badge */}
-            <div className="inline-flex items-center gap-3 mb-8 md:mb-10 px-5 py-2 rounded-full border border-primary/20 bg-primary/5 backdrop-blur-md transition-all duration-700">
+            <motion.div 
+              variants={{
+                hidden: { opacity: 0, y: 20 },
+                visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] } }
+              }}
+              className="inline-flex items-center gap-3 mb-8 md:mb-10 px-5 py-2 rounded-full border border-primary/20 bg-primary/5 backdrop-blur-md transition-all duration-700"
+            >
               <div className="w-2 h-2 rounded-full bg-primary animate-pulse" />
               <span className="text-[10px] md:text-[11px] font-bold uppercase tracking-[0.4em] text-primary">Sovereignty Protocol</span>
-            </div>
+            </motion.div>
 
-            <div className="flex flex-col items-center mb-8 md:mb-10">
+            <motion.div 
+              variants={{
+                hidden: { opacity: 0 },
+                visible: { opacity: 1, transition: { staggerChildren: 0.1 } }
+              }}
+              className="flex flex-col items-center mb-8 md:mb-10"
+            >
               <BlurText
                 text="Powering the Next"
                 delay={100}
@@ -108,14 +129,26 @@ const Hero = () => {
                 delay={100}
                 className="text-4xl sm:text-6xl md:text-9xl font-serif italic font-light opacity-80 text-white leading-[1.1] tracking-tight justify-center"
               />
-            </div>
+            </motion.div>
 
-            <p className="text-base md:text-xl text-slate-400 max-w-2xl mx-auto mb-12 md:mb-16 leading-relaxed font-sans font-light tracking-wide px-6">
+            <motion.p 
+              variants={{
+                hidden: { opacity: 0, y: 20 },
+                visible: { opacity: 1, y: 0, transition: { duration: 1, ease: [0.22, 1, 0.36, 1] } }
+              }}
+              className="text-base md:text-xl text-slate-400 max-w-2xl mx-auto mb-12 md:mb-16 leading-relaxed font-sans font-light tracking-wide px-6"
+            >
               A fully operational crypto platform before token launch — built with real utility from day one. 
               Engineered for the modern custodian who values absolute discretion.
-            </p>
+            </motion.p>
 
-            <div className="flex flex-col items-center gap-6 md:gap-8 mb-16 md:mb-24">
+            <motion.div 
+              variants={{
+                hidden: { opacity: 0, y: 20 },
+                visible: { opacity: 1, y: 0, transition: { duration: 1, ease: [0.22, 1, 0.36, 1] } }
+              }}
+              className="flex flex-col items-center gap-6 md:gap-8 mb-16 md:mb-24"
+            >
               <Link
                 href="/reserve"
                 className="group relative px-12 md:px-16 py-5 md:py-6 bg-primary text-black hover:bg-white transition-all duration-700 overflow-hidden rounded-sm w-auto min-w-[280px] text-center"
@@ -210,7 +243,7 @@ const Hero = () => {
                   </a>
                 </motion.div>
               </motion.div>
-            </div>
+            </motion.div>
 
               {/* Minimalist Countdown */}
               <div className="flex justify-center gap-3 sm:gap-10 md:gap-20 pt-20 md:pt-40 opacity-70 hover:opacity-100 transition-opacity duration-1000">
