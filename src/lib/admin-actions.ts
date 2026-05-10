@@ -5,13 +5,13 @@ import { BookingStatus } from './supabase'
 import { cookies } from 'next/headers'
 
 export async function adminLogin(formData: FormData) {
-  const email = formData.get('email')
-  const password = formData.get('password')
+  const email = (formData.get('email') as string)?.trim().toLowerCase()
+  const password = (formData.get('password') as string)?.trim()
 
-  if (
-    email === process.env.ADMIN_EMAIL &&
-    password === process.env.ADMIN_PASSWORD
-  ) {
+  const adminEmail = process.env.ADMIN_EMAIL?.trim().toLowerCase()
+  const adminPassword = process.env.ADMIN_PASSWORD?.trim()
+
+  if (email === adminEmail && password === adminPassword) {
     const cookieStore = await cookies()
     cookieStore.set('admin_session', 'true', {
       httpOnly: true,

@@ -110,10 +110,10 @@ export default function ReservePage() {
   }
 
   return (
-    <div className="container mx-auto px-6 pt-10 pb-20">
-      <Link href="/" className="inline-flex items-center gap-3 text-[10px] uppercase tracking-[0.2em] font-bold text-slate-500 hover:text-primary mb-16 transition-colors">
-        <ArrowLeft className="w-4 h-4" />
-        Return to Home
+    <div className="container mx-auto px-6 pt-8 md:pt-12 pb-20">
+      <Link href="/" className="inline-flex items-center gap-3 text-[10px] font-black uppercase tracking-[0.4em] text-slate-600 hover:text-primary mb-12 md:mb-16 transition-colors group">
+        <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
+        HOME
       </Link>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-32 items-start">

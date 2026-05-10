@@ -81,10 +81,10 @@ function StatusContent() {
   }
 
   return (
-    <div className="container mx-auto px-6 pt-4 pb-12">
-      <Link href="/" className="inline-flex items-center gap-3 text-[10px] uppercase tracking-[0.2em] font-bold text-slate-500 hover:text-primary mb-8 transition-colors">
-        <ArrowLeft className="w-4 h-4" />
-        Return to Home
+    <div className="container mx-auto px-6 pt-8 md:pt-12 pb-12">
+      <Link href="/" className="inline-flex items-center gap-3 text-[10px] font-black uppercase tracking-[0.4em] text-slate-600 hover:text-primary mb-8 transition-colors group">
+        <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
+        HOME
       </Link>
       <div className="max-w-3xl mx-auto">
         <div className="text-center mb-8 md:mb-12">

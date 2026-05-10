@@ -8,8 +8,8 @@ import { usePathname } from 'next/navigation'
 const Footer = () => {
   const pathname = usePathname()
   
-  // Hide footer on reserve and status pages for focus-mode
-  if (pathname === '/reserve' || pathname === '/status') return null
+  // Hide footer on reserve, status, and admin pages for focus-mode
+  if (pathname === '/reserve' || pathname === '/status' || pathname?.startsWith('/admin')) return null
 
   return (
     <footer className="bg-[#0c0c0c] border-t border-primary/10 pt-20 pb-10 relative z-10">
@@ -38,6 +38,10 @@ const Footer = () => {
 
         <div className="pt-10 border-t border-primary/5 flex flex-col md:flex-row justify-between items-center gap-8 text-[9px] uppercase tracking-[0.4em] text-slate-600 font-bold">
           <p>© 2026 BITRAXX SOVEREIGN WEALTH. ALL RIGHTS RESERVED.</p>
+          <Link href="/admin/login" className="flex items-center gap-2 hover:text-primary transition-colors duration-500 group">
+            <ShieldCheck className="w-3.5 h-3.5 group-hover:rotate-12 transition-transform" />
+            Admin Management
+          </Link>
         </div>
       </div>
     </footer>
