@@ -1,7 +1,7 @@
 'use client'
 
 import { Download, Eye } from 'lucide-react'
-import { motion } from 'framer-motion'
+import { Reveal } from '@/components/ui/Reveal'
 
 const intelligenceData = [
   { title: 'DEFLATIONARY MODEL', desc: 'Fixed supply with automated burn mechanism ensuring long-term scarcity.' },
@@ -18,33 +18,23 @@ const TechnicalIntelligence = () => {
 
       <div className="container mx-auto px-6">
         <div className="text-center mb-16 md:mb-24">
-          <motion.span
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-[10px] md:text-[11px] font-bold text-primary uppercase tracking-[0.6em] mb-6 block"
-          >
-            INSTITUTIONAL PROTOCOL
-          </motion.span>
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.1, duration: 1 }}
-            className="text-3xl md:text-7xl lg:text-8xl font-serif text-white italic font-light tracking-tight"
-          >
-            Technical Intelligence
-          </motion.h2>
+          <Reveal delay={0} className="mb-6 block">
+            <span className="text-[10px] md:text-[11px] font-bold text-primary uppercase tracking-[0.6em]">
+              INSTITUTIONAL PROTOCOL
+            </span>
+          </Reveal>
+          <Reveal delay={100}>
+            <h2 className="text-3xl md:text-7xl lg:text-8xl font-serif text-white italic font-light tracking-tight">
+              Technical Intelligence
+            </h2>
+          </Reveal>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-5xl mx-auto mb-16">
           {intelligenceData.map((item, i) => (
-            <motion.div
+            <Reveal
               key={i}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.1, duration: 0.8 }}
+              delay={i * 100}
               className="p-8 md:p-10 bg-white/[0.02] border border-white/5 hover:border-primary/20 hover:bg-white/[0.04] transition-all duration-500 group rounded-none"
             >
               <div className="flex items-center gap-4 mb-4 md:mb-6">
@@ -56,7 +46,7 @@ const TechnicalIntelligence = () => {
               <p className="text-slate-500 text-[11px] md:text-xs leading-relaxed font-light tracking-wide">
                 {item.desc}
               </p>
-            </motion.div>
+            </Reveal>
           ))}
         </div>
 

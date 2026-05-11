@@ -1,23 +1,26 @@
 'use client'
 
-import { useEffect } from 'react'
+import { useEffect, useLayoutEffect } from 'react'
 import Lenis from '@studio-freight/lenis'
 
+const useIsomorphicLayoutEffect = typeof window !== 'undefined' ? useLayoutEffect : useEffect
+
 export default function SmoothScroll({ children }: { children: React.ReactNode }) {
-  useEffect(() => {
+  useIsomorphicLayoutEffect(() => {
+    // Prevent default scroll restoration
+    if (typeof window !== 'undefined') {
+      window.history.scrollRestoration = 'manual'
+    }
+
     const lenis = new Lenis({
-      duration: 1.2,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      lerp: 0.08,
       orientation: 'vertical',
       gestureOrientation: 'vertical',
       smoothWheel: true,
-      wheelMultiplier: 1,
-      smoothTouch: false,
-      touchMultiplier: 2,
       infinite: false,
     })
 
-    let rafId: number;
+    let rafId: number
     function raf(time: number) {
       lenis.raf(time)
       rafId = requestAnimationFrame(raf)

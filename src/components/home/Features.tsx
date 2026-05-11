@@ -1,6 +1,6 @@
 'use client'
 import { Shield, Zap, Globe, Wallet, Database, Lock } from 'lucide-react'
-import { motion } from 'framer-motion'
+import { Reveal } from '@/components/ui/Reveal'
 
 const features = [
   {
@@ -46,28 +46,19 @@ const Features = () => {
     <section className="py-20 md:py-40 bg-[#0c0c0c] relative overflow-hidden">
       <div className="container mx-auto px-6 relative z-10">
         <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end mb-16 md:mb-32 gap-8">
-          <motion.div 
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-            className="max-w-2xl"
-          >
+          <Reveal animation="reveal-left" className="max-w-2xl">
             <h3 className="text-3xl sm:text-5xl md:text-7xl font-serif text-white leading-tight text-left">
               Institutional Power. <br />
               <span className="italic font-light opacity-80 text-primary">Retail Simplicity.</span>
             </h3>
-          </motion.div>
+          </Reveal>
         </div>
 
         <div className="space-y-0">
           {features.map((feature, index) => (
-            <motion.div
+            <Reveal
               key={index}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.8, delay: index * 0.1, ease: [0.22, 1, 0.36, 1] }}
+              delay={index * 100}
               className="group border-t border-primary/10 py-12 md:py-24 hover:bg-primary/[0.01] transition-all duration-700"
             >
               <div className="flex flex-col md:flex-row items-start gap-8 md:gap-24">
@@ -89,15 +80,11 @@ const Features = () => {
                   </p>
                 </div>
               </div>
-            </motion.div>
+            </Reveal>
           ))}
-          <motion.div 
-            initial={{ scaleX: 0 }}
-            whileInView={{ scaleX: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 1.5, ease: "easeInOut" }}
-            className="border-t border-primary/10 origin-left" 
-          />
+          <Reveal animation="reveal-scale" className="border-t border-primary/10">
+            <div />
+          </Reveal>
         </div>
       </div>
     </section>

@@ -1,7 +1,7 @@
 'use client'
 
 import { UserPlus, ShieldCheck, Award } from 'lucide-react'
-import { motion, Variants } from 'framer-motion'
+import { Reveal } from '@/components/ui/Reveal'
 
 const steps = [
   {
@@ -21,65 +21,30 @@ const steps = [
   },
 ]
 
-const containerVariants: Variants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.2,
-      delayChildren: 0.1
-    }
-  }
-}
-
-const itemVariants: Variants = {
-  hidden: { opacity: 0, y: 30 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.8,
-      ease: [0.22, 1, 0.36, 1] as any
-    }
-  }
-}
-
 const HowItWorks = () => {
   return (
     <section className="py-40 bg-[#0c0c0c]">
       <div className="container mx-auto px-6">
-        <motion.div 
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          variants={containerVariants}
-          className="text-center mb-32"
-        >
-          <motion.h2 variants={itemVariants} className="text-[10px] font-bold text-primary uppercase tracking-[0.5em] mb-8">The Onboarding Protocol</motion.h2>
-          <motion.h3 variants={itemVariants} className="text-4xl md:text-6xl font-serif text-white mb-10">A Seamless Transition.</motion.h3>
-        </motion.div>
+        <div className="text-center mb-32">
+          <Reveal delay={0} className="mb-8 block">
+            <h2 className="text-[10px] font-bold text-primary uppercase tracking-[0.5em]">The Onboarding Protocol</h2>
+          </Reveal>
+          <Reveal delay={100}>
+            <h3 className="text-4xl md:text-6xl font-serif text-white mb-10">A Seamless Transition.</h3>
+          </Reveal>
+        </div>
 
         <div className="max-w-6xl mx-auto">
-          <motion.div 
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-50px" }}
-            variants={containerVariants}
-            className="grid grid-cols-1 lg:grid-cols-3 gap-20 relative"
-          >
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-20 relative">
             {/* Architectural Connecting Line */}
-            <motion.div 
-              variants={{
-                hidden: { opacity: 0, y: 20 },
-                visible: { opacity: 1, y: 0, transition: { duration: 1, ease: [0.22, 1, 0.36, 1] as any } }
-              }}
-              className="hidden lg:block absolute top-[40px] left-[10%] right-[10%] h-[1px] bg-gradient-to-r from-transparent via-primary/20 to-transparent -z-10 origin-left" 
-            />
+            <Reveal animation="reveal-scale" className="hidden lg:block absolute top-[40px] left-[10%] right-[10%] h-[1px] bg-gradient-to-r from-transparent via-primary/20 to-transparent -z-10">
+              <div />
+            </Reveal>
 
             {steps.map((step, index) => (
-              <motion.div 
+              <Reveal 
                 key={index} 
-                variants={itemVariants}
+                delay={index * 150}
                 className="flex flex-col items-center text-center group"
               >
                 <div className="w-24 h-24 bg-[#0c0c0c] border border-primary/30 flex items-center justify-center mb-10 relative group-hover:border-primary transition-colors duration-500">
@@ -92,9 +57,9 @@ const HowItWorks = () => {
                 <p className="text-slate-500 text-sm leading-relaxed max-w-[280px] font-light tracking-wide">
                   {step.description}
                 </p>
-              </motion.div>
+              </Reveal>
             ))}
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>

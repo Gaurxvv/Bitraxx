@@ -3,6 +3,7 @@ import Features from "@/components/home/Features";
 import HowItWorks from "@/components/home/HowItWorks";
 import FAQ from "@/components/home/FAQ";
 import TechnicalIntelligence from "@/components/home/TechnicalIntelligence";
+import VideoShowcase from "@/components/home/VideoShowcase";
 import Countdown from "@/components/home/Countdown";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
@@ -14,6 +15,7 @@ export default function Home() {
       <BackgroundLines />
       <Hero />
       <TechnicalIntelligence />
+      <VideoShowcase />
       <Countdown />
       
       <Features />

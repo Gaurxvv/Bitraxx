@@ -258,23 +258,21 @@ const LightPillar: React.FC<LightPillarProps> = ({
     }
 
     let lastTime = performance.now();
-    const targetFPS = effectiveQuality === 'low' ? 30 : 60;
-    const frameTime = 1000 / targetFPS;
-
     const animate = (currentTime: number) => {
       if (!materialRef.current || !rendererRef.current || !sceneRef.current || !cameraRef.current) return;
 
       const deltaTime = currentTime - lastTime;
+      lastTime = currentTime;
 
-      if (deltaTime >= frameTime) {
-        timeRef.current += 0.016 * rotationSpeedRef.current;
-        const t = timeRef.current;
-        materialRef.current.uniforms.uTime.value = t;
-        materialRef.current.uniforms.uRotCos.value = Math.cos(t * 0.3);
-        materialRef.current.uniforms.uRotSin.value = Math.sin(t * 0.3);
-        rendererRef.current.render(sceneRef.current, cameraRef.current);
-        lastTime = currentTime - (deltaTime % frameTime);
-      }
+      // Use a constant multiplier for time based on deltaTime to keep speed consistent across different refresh rates
+      timeRef.current += (deltaTime / 1000) * rotationSpeedRef.current;
+      
+      const t = timeRef.current;
+      materialRef.current.uniforms.uTime.value = t;
+      materialRef.current.uniforms.uRotCos.value = Math.cos(t * 0.3);
+      materialRef.current.uniforms.uRotSin.value = Math.sin(t * 0.3);
+      
+      rendererRef.current.render(sceneRef.current, cameraRef.current);
 
       rafRef.current = requestAnimationFrame(animate);
     };
