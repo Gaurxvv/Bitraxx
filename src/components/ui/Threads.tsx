@@ -136,6 +136,8 @@ const Threads = ({ color = [1, 1, 1], amplitude = 1, distance = 0, enableMouseIn
   const containerRef = useRef<HTMLDivElement>(null);
   const animationFrameId = useRef<number | null>(null);
 
+  const programRef = useRef<any>(null);
+
   useEffect(() => {
     if (!containerRef.current) return;
     const container = containerRef.current;
@@ -146,7 +148,6 @@ const Threads = ({ color = [1, 1, 1], amplitude = 1, distance = 0, enableMouseIn
     gl.enable(gl.BLEND);
     gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
     
-    // Ensure canvas is visible and correctly positioned
     gl.canvas.style.position = 'absolute';
     gl.canvas.style.top = '0';
     gl.canvas.style.left = '0';
@@ -173,6 +174,7 @@ const Threads = ({ color = [1, 1, 1], amplitude = 1, distance = 0, enableMouseIn
         uLineCount: { value: lineCount }
       }
     });
+    programRef.current = program;
 
     const mesh = new Mesh(gl, { geometry, program });
 
@@ -236,7 +238,17 @@ const Threads = ({ color = [1, 1, 1], amplitude = 1, distance = 0, enableMouseIn
       if (container.contains(gl.canvas)) container.removeChild(gl.canvas);
       gl.getExtension('WEBGL_lose_context')?.loseContext();
     };
-  }, [color, amplitude, distance, enableMouseInteraction]);
+  }, []); // Only initialize once
+
+  // Separate effect to update uniforms without re-creating renderer
+  useEffect(() => {
+    if (programRef.current) {
+      programRef.current.uniforms.uColor.value.set(...color);
+      programRef.current.uniforms.uAmplitude.value = amplitude;
+      programRef.current.uniforms.uDistance.value = distance;
+      programRef.current.uniforms.uLineCount.value = lineCount;
+    }
+  }, [color, amplitude, distance, lineCount]);
 
   return <div ref={containerRef} className="threads-container" {...rest} />;
 };

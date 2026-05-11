@@ -7,7 +7,10 @@ import { ArrowRight, Shield } from 'lucide-react'
 import BlurText from '@/components/ui/BlurText'
 import dynamic from 'next/dynamic'
 
-const Threads = dynamic(() => import('@/components/ui/Threads'), { ssr: false })
+const Threads = dynamic(() => import('@/components/ui/Threads'), { 
+  ssr: false,
+  loading: () => <div className="absolute inset-0 bg-[#0c0c0c]" />
+})
 
 const Hero = () => {
   const [timeLeft, setTimeLeft] = useState({
@@ -19,10 +22,11 @@ const Hero = () => {
   const [isMobile, setIsMobile] = useState(false)
 
   useEffect(() => {
-    setIsMobile(window.innerWidth < 768)
-    const handleResize = () => setIsMobile(window.innerWidth < 768)
-    window.addEventListener('resize', handleResize)
-    return () => window.removeEventListener('resize', handleResize)
+    // Only run on client
+    const checkMobile = () => setIsMobile(window.innerWidth < 768)
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    return () => window.removeEventListener('resize', checkMobile)
   }, [])
 
   useEffect(() => {

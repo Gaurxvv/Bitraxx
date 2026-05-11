@@ -16,6 +16,12 @@
   --border: #262626;
   --input: #1a1a1a;
   --ring: #D4AF37;
+
+  color-scheme: dark;
+}
+
+html {
+  background-color: var(--background);
 }
 
 @theme inline {
