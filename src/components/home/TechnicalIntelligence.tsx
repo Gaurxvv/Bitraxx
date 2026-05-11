@@ -12,7 +12,7 @@ const intelligenceData = [
 
 const TechnicalIntelligence = () => {
   return (
-    <section className="py-24 md:py-48 bg-[#0c0c0c] relative overflow-hidden border-t border-white/5">
+    <section className="py-24 md:py-40 bg-[#0c0c0c] relative overflow-hidden border-t border-white/5">
       {/* Subtle ambient glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/2 rounded-full blur-[120px] -z-10" />
 

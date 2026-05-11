@@ -17,7 +17,7 @@ const Hero = () => {
   const active = mounted ? 'active' : ''
 
   return (
-    <section className="relative min-h-screen flex flex-col items-center justify-center pt-32 md:pt-28 pb-20 overflow-hidden bg-[#0c0c0c]">
+    <section className="relative min-h-screen flex flex-col items-center justify-center pt-32 md:pt-28 pb-24 md:pb-40 overflow-hidden bg-[#0c0c0c]">
       {/* Architectural Accents */}
       <div className="absolute inset-0 z-0 overflow-hidden bg-transparent">
         <div className="absolute top-[-10%] left-1/2 -translate-x-1/2 w-[600px] md:w-[1000px] h-[600px] md:h-[1000px] bg-primary/10 rounded-full blur-[80px] md:blur-[120px] opacity-30 animate-pulse-slow pointer-events-none" />

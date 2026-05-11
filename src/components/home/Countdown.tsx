@@ -35,7 +35,7 @@ const Countdown = () => {
   }, [])
 
   return (
-    <section className="pt-0 pb-24 md:pt-0 md:pb-48 bg-[#0c0c0c] relative overflow-hidden">
+    <section className="pt-8 pb-16 md:pb-24 bg-[#0c0c0c] relative overflow-hidden">
       {/* Background glow */}
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-primary/5 rounded-full blur-[100px] -z-10" />
       

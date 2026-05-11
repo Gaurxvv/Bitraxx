@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState, useRef } from 'react'
 import { Play, X } from 'lucide-react'
 import { Reveal } from '@/components/ui/Reveal'
 
@@ -8,7 +8,7 @@ const VideoShowcase = () => {
   const [isOpen, setIsOpen] = useState(false)
   const videoRef = useRef<HTMLVideoElement>(null)
 
-  // Use a simpler way to play/pause without an extra hook on the container
+  // Use a simpler way to play/pause
   const handleMouseEnter = () => {
     if (videoRef.current && !isOpen) {
       videoRef.current.play().catch(() => {})
@@ -22,7 +22,7 @@ const VideoShowcase = () => {
   }
 
   return (
-    <section className="py-6 md:py-10 bg-[#0c0c0c] relative overflow-hidden">
+    <section className="pt-16 md:pt-24 pb-8 bg-[#0c0c0c] relative overflow-hidden">
       <div className="container mx-auto px-6 relative z-10">
         <div className="max-w-5xl mx-auto">
           {/* Video Placeholder/Trigger */}
