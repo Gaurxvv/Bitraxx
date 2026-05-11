@@ -2,6 +2,8 @@ import Hero from "@/components/home/Hero";
 import Features from "@/components/home/Features";
 import HowItWorks from "@/components/home/HowItWorks";
 import FAQ from "@/components/home/FAQ";
+import TechnicalIntelligence from "@/components/home/TechnicalIntelligence";
+import Countdown from "@/components/home/Countdown";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import BackgroundLines from "@/components/layout/BackgroundLines";
@@ -11,6 +13,8 @@ export default function Home() {
     <div className="flex flex-col gap-0 bg-[#0c0c0c] relative">
       <BackgroundLines />
       <Hero />
+      <TechnicalIntelligence />
+      <Countdown />
       
       <Features />
       <HowItWorks />

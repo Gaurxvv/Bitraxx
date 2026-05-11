@@ -53,8 +53,12 @@ const FAQ = () => {
 
           <div className="space-y-0 border-t border-primary/10">
             {faqs.map((faq, index) => (
-              <div
+              <motion.div
                 key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.8, delay: index * 0.05 }}
                 className="border-b border-primary/10 overflow-hidden"
               >
                 <button
@@ -64,7 +68,7 @@ const FAQ = () => {
                   <span className={`text-xl md:text-2xl font-serif tracking-wide transition-colors duration-500 ${openIndex === index ? 'text-primary' : 'text-white'}`}>
                     {faq.question}
                   </span>
-                  <div className="w-8 h-8 flex items-center justify-center border border-primary/20 group-hover:border-primary transition-colors duration-500">
+                  <div className="w-8 h-8 flex items-center justify-center border border-primary/20 group-hover:border-primary transition-colors duration-500 rounded-none">
                     {openIndex === index ? (
                       <Minus className="w-4 h-4 text-primary" />
                     ) : (
@@ -86,7 +90,7 @@ const FAQ = () => {
                     </motion.div>
                   )}
                 </AnimatePresence>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>

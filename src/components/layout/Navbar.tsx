@@ -23,8 +23,8 @@ const Navbar = () => {
     <nav className="fixed top-0 left-0 right-0 z-50 transition-all duration-700 px-4 md:px-8 py-3">
       <div
         className={`mx-auto transition-all duration-700 ${scrolled
-            ? 'max-w-5xl bg-[#0c0c0c]/80 backdrop-blur-2xl border border-primary/20 rounded-2xl py-1 px-4 md:px-8 shadow-[0_20px_50px_rgba(0,0,0,0.5)]'
-            : 'max-w-7xl bg-transparent py-3 px-6 rounded-none'
+          ? 'max-w-5xl bg-[#0c0c0c]/80 backdrop-blur-2xl border border-primary/20 rounded-2xl py-1 px-4 md:px-8 shadow-[0_20px_50px_rgba(0,0,0,0.5)]'
+          : 'max-w-7xl bg-transparent py-3 px-6 rounded-none'
           } flex justify-between items-center`}
       >
         <Link href="/" className="flex items-center group shrink-0">
