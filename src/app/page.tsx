@@ -1,5 +1,4 @@
 import Hero from "@/components/home/Hero";
-import Features from "@/components/home/Features";
 import HowItWorks from "@/components/home/HowItWorks";
 import FAQ from "@/components/home/FAQ";
 import TechnicalIntelligence from "@/components/home/TechnicalIntelligence";
@@ -18,7 +17,6 @@ export default function Home() {
       <VideoShowcase />
       <Countdown />
       
-      <Features />
       <HowItWorks />
 
       {/* Cinematic CTA Section */}
