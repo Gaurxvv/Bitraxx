@@ -23,9 +23,9 @@ const steps = [
 
 const HowItWorks = () => {
   return (
-    <section className="py-40 bg-[#0c0c0c]">
+    <section className="py-20 md:py-40 bg-[#0c0c0c]">
       <div className="container mx-auto px-6">
-        <div className="text-center mb-32">
+        <div className="text-center mb-16 md:mb-32">
           <Reveal delay={0} className="mb-8 block">
             <h2 className="text-[10px] font-bold text-primary uppercase tracking-[0.5em]">The Onboarding Protocol</h2>
           </Reveal>
