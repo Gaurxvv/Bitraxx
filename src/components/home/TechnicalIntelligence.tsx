@@ -34,7 +34,7 @@ const TechnicalIntelligence = () => {
             className="w-full sm:w-auto flex items-center justify-center gap-4 px-10 py-5 border border-white/10 text-slate-300 text-[10px] font-bold uppercase tracking-[0.3em] hover:bg-white/5 hover:border-white/20 transition-all duration-500 group rounded-none"
           >
             <Download className="w-4 h-4 text-primary opacity-60 group-hover:opacity-100 transition-opacity" />
-            <span>Download Analysis</span>
+            <span>Download Whitepaper</span>
           </a>
           
           <a
@@ -43,7 +43,7 @@ const TechnicalIntelligence = () => {
             className="w-full sm:w-auto flex items-center justify-center gap-4 px-10 py-5 bg-primary text-black text-[10px] font-bold uppercase tracking-[0.3em] hover:bg-white transition-all duration-500 rounded-none shadow-[0_10px_40px_rgba(212,175,55,0.25)]"
           >
             <Eye className="w-4 h-4" />
-            <span>Open Whitepaper</span>
+            <span>View Whitepaper</span>
           </a>
         </div>
       </div>
