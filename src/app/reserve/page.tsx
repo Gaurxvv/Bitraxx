@@ -1,22 +1,27 @@
 'use client'
 
-import { useState } from 'react'
-import { useForm } from 'react-hook-form'
+import { useState, useEffect } from 'react'
+import { useForm, useWatch } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import * as z from 'zod'
-import { motion } from 'framer-motion'
-import { CheckCircle2, Loader2, Copy, ArrowLeft } from 'lucide-react'
+import { motion, AnimatePresence } from 'framer-motion'
+import { CheckCircle2, Loader2, Copy, ArrowLeft, Search } from 'lucide-react'
 import { createBooking } from '@/lib/actions'
 import { toast } from 'sonner'
 import Link from 'next/link'
+import { countries } from '@/lib/countries'
 
 const formSchema = z.object({
   full_name: z.string().min(2, 'Full name is required'),
   email: z.string().email('Invalid email address'),
-  phone: z.string().min(10, 'Valid phone number is required'),
+  phone: z.string().min(5, 'Valid phone number is required'),
   country: z.string().min(2, 'Country is required'),
-  amount: z.string().min(1, 'Amount is required'),
-  notes: z.string().optional(),
+  amount: z.string()
+    .min(1, 'Amount is required')
+    .refine((val) => {
+      const num = parseFloat(val.replace(/,/g, ''));
+      return !isNaN(num) && num >= 250 && num <= 12000;
+    }, 'Allocation must be between $250 and $12,000'),
 })
 
 type FormData = z.infer<typeof formSchema>
@@ -24,15 +29,41 @@ type FormData = z.infer<typeof formSchema>
 export default function ReservePage() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submittedId, setSubmittedId] = useState<string | null>(null)
+  const [showSuggestions, setShowSuggestions] = useState(false)
+  const [countrySearch, setCountrySearch] = useState('')
 
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
+    setValue,
+    control,
+    watch,
   } = useForm<FormData>({
     resolver: zodResolver(formSchema),
   })
+
+  const selectedCountry = watch('country')
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (!(event.target as HTMLElement).closest('.country-input-group')) {
+        setShowSuggestions(false)
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => document.removeEventListener('mousedown', handleClickOutside)
+  }, [])
+
+  useEffect(() => {
+    if (selectedCountry) {
+      const countryData = countries.find(c => c.name.toLowerCase() === selectedCountry.toLowerCase())
+      if (countryData) {
+        setValue('phone', countryData.dial_code + ' ')
+      }
+    }
+  }, [selectedCountry, setValue])
 
   const onSubmit = async (data: FormData) => {
     setIsSubmitting(true)
@@ -180,6 +211,53 @@ export default function ReservePage() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <div className="space-y-3">
+                <label className="text-[10px] font-bold uppercase tracking-[0.3em] text-slate-500 ml-1">Legal Jurisdiction</label>
+                <div className="relative country-input-group">
+                  <input
+                    {...register('country')}
+                    placeholder="Search Country"
+                    autoComplete="off"
+                    onChange={(e) => {
+                      register('country').onChange(e)
+                      setCountrySearch(e.target.value)
+                      setShowSuggestions(true)
+                    }}
+                    onFocus={() => setShowSuggestions(true)}
+                    className="w-full px-0 py-3 bg-transparent border-b border-white/10 text-white text-base focus:border-primary outline-none transition-all placeholder:text-slate-700 font-sans"
+                  />
+
+                  <AnimatePresence>
+                    {showSuggestions && countrySearch.length > 0 && (
+                      <motion.div
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: 10 }}
+                        className="absolute z-50 left-0 right-0 mt-2 max-h-60 overflow-y-auto bg-[#0A0A0A] border border-white/10 rounded-xl shadow-2xl backdrop-blur-xl no-scrollbar"
+                      >
+                        {countries
+                          .filter(c => c.name.toLowerCase().includes(countrySearch.toLowerCase()))
+                          .map((c) => (
+                            <button
+                              key={c.code}
+                              type="button"
+                              onClick={() => {
+                                setValue('country', c.name)
+                                setCountrySearch(c.name)
+                                setShowSuggestions(false)
+                              }}
+                              className="w-full px-6 py-4 text-left text-sm text-slate-400 hover:text-primary hover:bg-white/[0.03] transition-all border-b border-white/5 last:border-0 flex items-center justify-between group"
+                            >
+                              <span className="font-medium tracking-wide">{c.name}</span>
+                              <span className="text-[10px] text-slate-600 group-hover:text-primary/50 font-mono">{c.dial_code}</span>
+                            </button>
+                          ))}
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+                {errors.country && <p className="text-red-500 text-[9px] font-bold uppercase tracking-widest mt-1">{errors.country.message}</p>}
+              </div>
+              <div className="space-y-3">
                 <label className="text-[10px] font-bold uppercase tracking-[0.3em] text-slate-500 ml-1">Contact Number</label>
                 <input
                   {...register('phone')}
@@ -188,35 +266,22 @@ export default function ReservePage() {
                 />
                 {errors.phone && <p className="text-red-500 text-[9px] font-bold uppercase tracking-widest mt-1">{errors.phone.message}</p>}
               </div>
-              <div className="space-y-3">
-                <label className="text-[10px] font-bold uppercase tracking-[0.3em] text-slate-500 ml-1">Legal Jurisdiction</label>
-                <input
-                  {...register('country')}
-                  placeholder="Country"
-                  className="w-full px-0 py-3 bg-transparent border-b border-white/10 text-white text-base focus:border-primary outline-none transition-all placeholder:text-slate-700 font-sans"
-                />
-                {errors.country && <p className="text-red-500 text-[9px] font-bold uppercase tracking-widest mt-1">{errors.country.message}</p>}
-              </div>
             </div>
 
             <div className="space-y-3">
               <label className="text-[10px] font-bold uppercase tracking-[0.3em] text-slate-500 ml-1">Requested Allocation (USD)</label>
-              <input
-                {...register('amount')}
-                placeholder="e.g. 50,000"
-                className="w-full px-0 py-3 bg-transparent border-b border-white/10 text-white text-base focus:border-primary outline-none transition-all placeholder:text-slate-700 font-sans"
-              />
+              <div className="relative">
+                <input
+                  {...register('amount')}
+                  placeholder="250 - 12,000"
+                  type="text"
+                  className="w-full px-0 py-3 bg-transparent border-b border-white/10 text-white text-base focus:border-primary outline-none transition-all placeholder:text-slate-700 font-sans"
+                />
+                <div className="absolute right-0 top-1/2 -translate-y-1/2 text-[9px] font-bold text-slate-600 tracking-widest">
+                  MIN $250 / MAX $12,000
+                </div>
+              </div>
               {errors.amount && <p className="text-red-500 text-[9px] font-bold uppercase tracking-widest mt-1">{errors.amount.message}</p>}
-            </div>
-
-            <div className="space-y-3">
-              <label className="text-[10px] font-bold uppercase tracking-[0.3em] text-slate-500 ml-1">Institutional Notes</label>
-              <textarea
-                {...register('notes')}
-                rows={1}
-                placeholder="Additional specifications..."
-                className="w-full px-0 py-3 bg-transparent border-b border-white/10 text-white text-base focus:border-primary outline-none transition-all resize-none placeholder:text-slate-700 font-sans"
-              />
             </div>
 
             <button
