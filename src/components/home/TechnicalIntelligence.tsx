@@ -40,6 +40,7 @@ const TechnicalIntelligence = () => {
           <a
             href="/whitepaper.pdf"
             target="_blank"
+            rel="noopener noreferrer"
             className="w-full sm:w-auto flex items-center justify-center gap-4 px-10 py-5 bg-primary text-black text-[10px] font-bold uppercase tracking-[0.3em] hover:bg-white transition-all duration-500 rounded-none shadow-[0_10px_40px_rgba(212,175,55,0.25)]"
           >
             <Eye className="w-4 h-4" />
